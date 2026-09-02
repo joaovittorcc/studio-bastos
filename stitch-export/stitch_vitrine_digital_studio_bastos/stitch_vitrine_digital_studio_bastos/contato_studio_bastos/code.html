@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Studio Bastos - Contato e Agendamento</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&amp;family=Playfair+Display:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-container": "#83a69c",
+                      "tertiary-fixed": "#e5e2db",
+                      "inverse-primary": "#aacec3",
+                      "inverse-surface": "#34302c",
+                      "surface-dim": "#e1d8d4",
+                      "on-primary": "#ffffff",
+                      "primary-fixed": "#c5eadf",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#e9e1dc",
+                      "inverse-on-surface": "#f8efea",
+                      "outline-variant": "#c1c8c4",
+                      "surface-container-highest": "#e9e1dc",
+                      "surface": "#fff8f5",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-container": "#a19f99",
+                      "outline": "#717976",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#474742",
+                      "secondary-container": "#fed488",
+                      "on-secondary-fixed": "#261900",
+                      "tertiary-container": "#363632",
+                      "tertiary": "#21211d",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#5d4201",
+                      "primary-container": "#1a3c34",
+                      "on-background": "#1e1b18",
+                      "surface-container-high": "#efe6e2",
+                      "error": "#ba1a1a",
+                      "surface-container": "#f5ece7",
+                      "on-surface-variant": "#414846",
+                      "on-primary-fixed": "#00201a",
+                      "surface-container-low": "#fbf2ed",
+                      "primary-fixed-dim": "#aacec3",
+                      "secondary-fixed": "#ffdea5",
+                      "tertiary-fixed-dim": "#c9c6c0",
+                      "surface-tint": "#43655c",
+                      "primary": "#01261f",
+                      "secondary": "#775a19",
+                      "on-tertiary-fixed": "#1c1c18",
+                      "on-primary-fixed-variant": "#2b4d44",
+                      "on-surface": "#1e1b18",
+                      "surface-bright": "#fff8f5",
+                      "on-secondary-container": "#785a1a",
+                      "secondary-fixed-dim": "#e9c176",
+                      "background": "#fff8f5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "base": "8px",
+                      "section-padding-desktop": "120px",
+                      "gutter": "24px",
+                      "section-padding-mobile": "64px"
+              },
+              "fontFamily": {
+                      "headline-sm": [
+                              "Playfair Display"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Playfair Display"
+                      ],
+                      "display-lg-mobile": [
+                              "Playfair Display"
+                      ],
+                      "headline-md": [
+                              "Playfair Display"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-caps": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-sm": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .custom-input {
+            border: none;
+            border-bottom: 1px solid #717976;
+            background: transparent;
+            padding: 8px 0;
+            width: 100%;
+            transition: border-color 0.3s ease;
+        }
+        .custom-input:focus {
+            outline: none;
+            border-bottom-color: #775a19; /* Secondary/Gold */
+            box-shadow: none;
+        }
+      </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col pt-[88px]">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-container-highest/80 backdrop-blur-md border-b border-outline-variant/30 flat no shadows">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-container-max mx-auto">
+<div class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed tracking-tight">
+                Studio Bastos
+            </div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant dark:text-on-surface-variant/80 font-label-caps text-label-caps hover:text-secondary transition-colors duration-300" href="#">Início</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant/80 font-label-caps text-label-caps hover:text-secondary transition-colors duration-300" href="#">Serviços</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant/80 font-label-caps text-label-caps hover:text-secondary transition-colors duration-300" href="#">Sobre</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-secondary font-label-caps text-label-caps hover:text-secondary transition-colors duration-300" href="#">Contato</a>
+</nav>
+<button class="hidden md:block bg-primary-container text-on-primary font-label-caps text-label-caps h-[48px] px-6 rounded-none hover:opacity-90 transition-opacity">
+                Agendar
+            </button>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined" data-icon="menu" data-weight="regular">menu</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col w-full max-w-container-max mx-auto px-gutter md:px-8 py-section-padding-mobile md:py-section-padding-desktop gap-section-padding-mobile md:gap-section-padding-desktop">
+<!-- Hero Section -->
+<section class="text-center max-w-2xl mx-auto space-y-6">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary">Fale Conosco</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                Agende sua avaliação tricológica ou tire suas dúvidas. Nossa equipe está pronta para oferecer um atendimento acolhedor e especializado.
+            </p>
+</section>
+<!-- Bento Grid Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Contact Info & Socials (Left Column) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Direct Contact Card -->
+<div class="bg-surface-container-lowest border border-surface-dim p-8 flex flex-col gap-8 h-full">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary mb-2">Informações</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Horário de funcionamento: Seg a Sáb, 09h às 19h.</p>
+</div>
+<div class="space-y-6 flex-grow">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="location_on" data-weight="regular">location_on</span>
+<div>
+<h3 class="font-label-caps text-label-caps text-primary mb-1">Endereço</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Jardim América<br/>Goiânia - GO</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="call" data-weight="regular">call</span>
+<div>
+<h3 class="font-label-caps text-label-caps text-primary mb-1">Telefone / WhatsApp</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">(62) 99999-9999</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="mail" data-weight="regular">mail</span>
+<div>
+<h3 class="font-label-caps text-label-caps text-primary mb-1">E-mail</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">contato@studiobastos.com.br</p>
+</div>
+</div>
+</div>
+<!-- Social Links -->
+<div class="pt-6 border-t border-surface-dim">
+<h3 class="font-label-caps text-label-caps text-primary mb-4">Siga-nos</h3>
+<div class="flex gap-4">
+<a class="w-12 h-12 rounded-full border border-surface-dim flex items-center justify-center text-primary hover:border-secondary hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="photo_camera" data-weight="regular">photo_camera</span>
+</a>
+<a class="w-12 h-12 rounded-full border border-surface-dim flex items-center justify-center text-primary hover:border-secondary hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="share" data-weight="regular">share</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Contact Form (Right Column) -->
+<div class="lg:col-span-7 bg-surface-container-lowest border border-surface-dim p-8 md:p-12">
+<h2 class="font-headline-md text-headline-md text-primary mb-8">Envie uma Mensagem</h2>
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Nome -->
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps text-primary mb-2" for="name">Nome Completo</label>
+<input class="custom-input font-body-md text-body-md text-on-surface" id="name" placeholder="Seu nome" type="text"/>
+</div>
+<!-- Telefone -->
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps text-primary mb-2" for="phone">Telefone</label>
+<input class="custom-input font-body-md text-body-md text-on-surface" id="phone" placeholder="(62) 00000-0000" type="tel"/>
+</div>
+</div>
+<!-- Assunto -->
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps text-primary mb-2" for="subject">Assunto</label>
+<select class="custom-input font-body-md text-body-md text-on-surface-variant cursor-pointer appearance-none" id="subject">
+<option>Agendamento de Avaliação</option>
+<option>Dúvidas sobre Tratamentos</option>
+<option>Outros</option>
+</select>
+</div>
+<!-- Mensagem -->
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps text-primary mb-2" for="message">Mensagem</label>
+<textarea class="custom-input font-body-md text-body-md text-on-surface resize-none" id="message" placeholder="Como podemos ajudar?" rows="4"></textarea>
+</div>
+<button class="bg-primary-container text-on-primary font-label-caps text-label-caps h-[48px] px-8 rounded-none w-full md:w-auto hover:bg-primary transition-colors flex items-center justify-center gap-2" type="submit">
+<span>Enviar Mensagem</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward" data-weight="regular">arrow_forward</span>
+</button>
+</form>
+</div>
+</section>
+<!-- Map Section -->
+<section class="w-full">
+<h2 class="font-headline-md text-headline-md text-primary mb-8 text-center">Nossa Localização</h2>
+<div class="w-full h-96 bg-surface-container border border-surface-dim relative overflow-hidden">
+<!-- Map Placeholder using data-location -->
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A detailed, modern digital map interface highlighting a specific location in Jardim América, Goiânia. The map utilizes a minimal, high-contrast color scheme with botanical green accents and subtle gold route lines against a very pale, clinical white background. The aesthetic is clean, professional, and slightly abstracted, emphasizing clarity and elegant wayfinding in a light-mode UI style." data-location="Jardim América, Goiânia" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKizY-xW6D5ECsL1sLGBuAUatCz6l0lmdLP7DZspu1QUTpcZAIqS8Fk4umrlAJG_zZd7gXsi97gh03ZwwRy7hFwNHTvxaVtJ1MPoSZ7qq4HOesk2mpsJTr6v_MOg15nMWsHKnoi9dRvYndPreoO1nBnsEE95KUmFKQI00JsB9l8NTRirIq-RysNnTR-ieyYlMPtxrRp0MEuLs_-srQ7rQ3emA5ifRiJu2pXDZrhh9EsC6w8wwrp63w"/>
+<!-- Overlay for aesthetic blending -->
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-primary dark:bg-primary-container flex flex-col items-center gap-8 py-12 px-base max-w-container-max mx-auto text-center">
+<div class="font-headline-sm text-headline-sm text-on-primary">
+            Studio Bastos
+        </div>
+<nav class="flex flex-wrap justify-center gap-6">
+<a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed-dim transition-colors" href="#">Privacidade</a>
+<a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed-dim transition-colors" href="#">Termos</a>
+<a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed-dim transition-colors" href="#">Trabalhe Conosco</a>
+</nav>
+<div class="font-body-md text-body-md text-on-primary/60 max-w-md mx-auto">
+            © 2024 Studio Bastos - Tricologia &amp; Bem-estar. Jardim América, Goiânia.
+        </div>
+</footer>
+</body></html>

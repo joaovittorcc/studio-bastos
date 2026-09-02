@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta name="robots" content="noindex, nofollow">
+<title>Studio Bastos - Vitrine Digital</title>
+<link rel="stylesheet" href="dist/output.css">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+    .demo-nota { background: #5d4201; color: #ffffff; }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased md:bg-surface-container-low min-h-screen">
+
+<!-- Barra fixa: aviso de demonstração + navegação -->
+<div id="site-header" class="sticky top-0 z-[60]">
+
+<!-- Demo notice -->
+<div class="demo-nota text-xs text-center py-2 px-4">
+    ⚠️ VITRINE DEMONSTRATIVA — Serviços e preços são exemplos ilustrativos. O catálogo real será cadastrado pelo Studio Bastos.
+</div>
+
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex justify-between items-center w-full px-4 md:px-8 py-4 max-w-container-max mx-auto bg-surface/80 backdrop-blur-xl shadow-[0_30px_30px_-5px_rgba(1,38,31,0.08)] z-50">
+    <div class="font-display-lg text-primary tracking-tighter">Studio Bastos</div>
+    <div class="flex gap-gutter items-center">
+        <a class="text-primary font-bold border-b-2 border-secondary pb-1 hover:text-primary-container transition-colors font-label-caps text-label-caps scale-95 active:scale-90 transition-transform cursor-pointer" onclick="irParaServicos()">Serviços</a>
+        <a class="text-on-surface-variant hover:text-primary-container transition-colors font-label-caps text-label-caps scale-95 active:scale-90 transition-transform cursor-pointer" onclick="irParaContato()">Localização</a>
+        <a class="text-on-surface-variant hover:text-primary-container transition-colors font-label-caps text-label-caps scale-95 active:scale-90 transition-transform cursor-pointer" onclick="abrirWhatsappGenerico()">Contato</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-primary hover:text-primary-container transition-colors cursor-pointer" onclick="document.getElementById('search-input').focus()">search</span>
+        <div class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-full">
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="font-label-caps text-label-caps font-bold">4,9 (45 avaliações)</span>
+        </div>
+    </div>
+</nav>
+
+</div>
+
+<script>
+(function () {
+    var header = document.getElementById('site-header');
+    function medir() {
+        document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+    }
+    medir();
+    window.addEventListener('resize', medir);
+})();
+</script>
+
+<!-- Header Section (Mobile priority, centered on Desktop) -->
+<header class="relative w-full h-[409px] md:h-[460px] min-h-[300px] flex items-end justify-center md:rounded-b-3xl overflow-hidden mx-auto max-w-container-max md:mt-4 shadow-xl">
+    <div class="absolute inset-0 bg-surface-variant">
+        <img class="w-full h-full object-cover" alt="Ambiente clínico sereno de tratamento capilar, com iluminação suave e paleta em tons de verde botânico e branco, foto ilustrativa gerada por IA" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2RZMznZhG7AQhCnbrLgCTyZRvQsDIzB44LoQWP0YPfWjfGASSQiNRkeM8oZV8nf0I7F6j7UnPnjGmhJ77ZQmEJQtlSM7VWrrbxf9aA0oDNlK5JUWhEfDnUrNwn1H17WpzVPEyQOE_o2f3b4Vg_M0mnShJbZf4lQcOW5LqX9x-1EFu6IMDNIVV6ptQkffFH1yNoUUEV0l9h2aVP3yDblAiCc3v4XhY984qbwaWYTAnnbMMASqH4uks">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent"></div>
+    <div class="relative z-10 w-full px-4 md:px-8 py-8 flex flex-col items-start gap-3 max-w-4xl">
+        <div class="flex flex-wrap items-center gap-2">
+            <div class="flex items-center gap-2 bg-tertiary-container/30 border border-tertiary-container/40 rounded-full px-3 py-1 backdrop-blur-md">
+                <span class="material-symbols-outlined text-on-tertiary-fixed text-[16px]">auto_awesome</span>
+                <span class="text-on-tertiary-fixed font-label-caps text-label-caps text-xs uppercase tracking-wider">Tradição local em tricologia</span>
+            </div>
+            <div class="flex md:hidden items-center gap-1 bg-secondary-container/90 text-on-secondary-container rounded-full px-3 py-1 backdrop-blur-md">
+                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="font-label-caps text-label-caps text-xs font-bold">4,9 (45 avaliações)</span>
+            </div>
+        </div>
+        <h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-primary drop-shadow-md">
+            Studio Bastos
+        </h1>
+        <p class="text-surface flex items-center gap-1 font-body-md text-body-md opacity-90">
+            <span class="material-symbols-outlined text-[18px]">location_on</span>
+            Jardim América, Goiânia — especialistas em tricologia e terapia capilar
+        </p>
+        <button onclick="irParaContato()" class="mt-2 bg-surface/20 hover:bg-surface/30 border border-surface/40 backdrop-blur-md text-on-primary rounded-full px-6 py-2 flex items-center gap-2 transition-all font-label-caps text-label-caps">
+            <span class="material-symbols-outlined text-[18px]">info</span>
+            Mais informações
+        </button>
+    </div>
+</header>
+
+<main class="max-w-container-max mx-auto md:px-8 pb-[120px] md:pb-16">
+    <!-- Sticky Category Navigation -->
+    <div class="sticky top-[var(--header-h)] z-40 glass-surface border-b border-outline-variant/40 px-4 md:px-8 py-3 shadow-sm mb-12">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-3 md:gap-gutter items-center justify-between">
+            <!-- Search Bar -->
+            <div class="relative w-full md:w-64">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                <input id="search-input" class="w-full bg-surface-container-high border-none rounded-full py-2 pl-10 pr-4 text-on-surface focus:ring-2 focus:ring-primary font-body-md text-body-md placeholder-on-surface-variant" placeholder="Buscar um serviço..." type="text">
+            </div>
+            <!-- Categories -->
+            <div id="category-nav" class="flex gap-2 w-full overflow-x-auto pb-2 no-scrollbar snap-x">
+                <a class="snap-start flex-shrink-0 bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-label-caps text-label-caps flex items-center gap-2 shadow-sm" href="#tricologia">
+                    <span class="material-symbols-outlined text-[18px]">science</span>
+                    Tricologia
+                </a>
+                <a class="snap-start flex-shrink-0 bg-surface-container-high text-on-surface hover:bg-surface-variant px-4 py-2 rounded-full font-label-caps text-label-caps flex items-center gap-2 transition-colors" href="#corte">
+                    <span class="material-symbols-outlined text-[18px]">content_cut</span>
+                    Corte
+                </a>
+                <a class="snap-start flex-shrink-0 bg-surface-container-high text-on-surface hover:bg-surface-variant px-4 py-2 rounded-full font-label-caps text-label-caps flex items-center gap-2 transition-colors" href="#manicure">
+                    <span class="material-symbols-outlined text-[18px]">spa</span>
+                    Manicure
+                </a>
+                <a class="snap-start flex-shrink-0 bg-surface-container-high text-on-surface hover:bg-surface-variant px-4 py-2 rounded-full font-label-caps text-label-caps flex items-center gap-2 transition-colors" href="#sobrancelhas">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span>
+                    Sobrancelhas
+                </a>
+                <a class="snap-start flex-shrink-0 bg-surface-container-high text-on-surface hover:bg-surface-variant px-4 py-2 rounded-full font-label-caps text-label-caps flex items-center gap-2 transition-colors" href="#maquiagem">
+                    <span class="material-symbols-outlined text-[18px]">palette</span>
+                    Maquiagem
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-4 md:px-0 max-w-4xl mx-auto">
+        <div id="servicos-container" class="flex flex-col gap-12">
+            <!-- Renderizado dinamicamente por js/main.js a partir de window.SERVICOS -->
+        </div>
+    </div>
+</main>
+
+<!-- Floating WhatsApp CTA (mobile) -->
+<button onclick="abrirWhatsappGenerico()" aria-label="Agende pelo WhatsApp" class="md:hidden fixed bottom-[88px] right-6 z-40 bg-primary text-on-primary w-14 h-14 rounded-full flex items-center justify-center shadow-[0_10px_25px_rgba(1,38,31,0.4)] active:scale-95 transition-transform animate-bounce">
+    <span class="material-symbols-outlined text-2xl">chat</span>
+</button>
+
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface/80 backdrop-blur-xl rounded-t-xl shadow-[0_-10px_30px_rgba(1,38,31,0.1)] border-t border-outline-variant/30">
+    <button onclick="irParaServicos()" class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-5 py-2 scale-110 transition-all duration-300 shadow-sm">
+        <span class="material-symbols-outlined text-[24px]">content_cut</span>
+        <span class="font-label-caps text-[10px] mt-1">Serviços</span>
+    </button>
+    <button onclick="abrirWhatsappGenerico()" class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 rounded-full px-3 py-2 transition-all">
+        <span class="material-symbols-outlined text-[24px]">chat</span>
+        <span class="font-label-caps text-[10px] mt-1">Agendar</span>
+    </button>
+    <button onclick="abrirInstagram()" class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 rounded-full px-3 py-2 transition-all">
+        <span class="material-symbols-outlined text-[24px]">photo_camera</span>
+        <span class="font-label-caps text-[10px] mt-1">Instagram</span>
+    </button>
+</nav>
+
+<!-- Footer -->
+<footer id="footer-contato" class="w-full py-12 px-6 flex flex-col items-center gap-4 bg-surface-container-highest mb-[80px] md:mb-0">
+    <div class="font-headline-md text-headline-md text-on-surface text-center">Studio Bastos</div>
+    <div class="flex items-center gap-1 text-on-surface font-label-caps text-label-caps">
+        <span class="material-symbols-outlined text-[18px] text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+        4,9 (45 avaliações no Google)
+    </div>
+    <div class="flex flex-col md:flex-row gap-4 items-center text-center">
+        <a class="text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100 transition-opacity font-label-caps text-label-caps" href="https://wa.me/5562992742808" target="_blank" rel="noopener">WhatsApp (62) 99274-2808</a>
+        <a class="text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100 transition-opacity font-label-caps text-label-caps" href="https://instagram.com/studiobastos_" target="_blank" rel="noopener">Instagram @studiobastos_</a>
+        <span class="text-on-surface-variant font-label-caps text-label-caps">Av. C-197, Qd534 Lt01 nº1208, Jardim América, Goiânia-GO</span>
+    </div>
+    <p class="font-body-md text-body-md text-on-surface-variant text-sm text-center opacity-70">© 2026 Studio Bastos - Goiânia, GO.</p>
+</footer>
+
+<script>
+    // Realça a categoria clicada na barra de categorias (não afeta a nav superior de desktop).
+    const categoryLinks = document.querySelectorAll('#category-nav a');
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            categoryLinks.forEach(l => {
+                l.classList.remove('bg-primary-container', 'text-on-primary-container');
+                l.classList.add('bg-surface-container-high', 'text-on-surface');
+            });
+            e.currentTarget.classList.remove('bg-surface-container-high', 'text-on-surface');
+            e.currentTarget.classList.add('bg-primary-container', 'text-on-primary-container');
+        });
+    });
+</script>
+<script src="js/servicos-data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

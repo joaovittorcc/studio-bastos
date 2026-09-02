@@ -1,0 +1,21 @@
+{
+  "name": "studio-bastos",
+  "version": "1.0.0",
+  "description": "Vitrine digital / catálogo de serviços demonstrativo - Studio Bastos",
+  "main": "index.html",
+  "scripts": {
+    "dev": "concurrently \"npm run watch:css\" \"npm run serve\"",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "build": "npm run build:css",
+    "serve": "live-server --port=5008 --no-browser --ignore=node_modules,src,stitch-export"
+  },
+  "keywords": ["tricologia", "vitrine-digital", "studio-bastos", "salao-de-beleza"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "live-server": "^1.2.2",
+    "tailwindcss": "^3.4.1"
+  }
+}
