@@ -7,6 +7,7 @@
     "dev": "concurrently \"npm run watch:css\" \"npm run serve\"",
     "watch:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
     "build:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "build:fonts": "node scripts/build-fonts.js",
     "build": "npm run build:css",
     "serve": "live-server --port=5008 --no-browser --ignore=node_modules,src,stitch-export"
   },

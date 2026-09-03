@@ -46,6 +46,13 @@
     overflow: hidden;
   }
   .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+  /* Alvo de âncora (seções de categoria e o container de serviços).
+     Sem isso, clicar numa categoria leva o topo da seção para o topo da JANELA —
+     e o título da seção fica escondido atrás do header + barra de categorias, que
+     são fixos. --sticky-h é a soma da altura das duas barras, medida em runtime
+     pelo script no index.html (ela muda quando o aviso de demo quebra em 2 linhas).
+     O fallback de 176px cobre o intervalo entre o primeiro paint e a medição. */
+  .scroll-target { scroll-margin-top: calc(var(--sticky-h, 176px) + 1rem); }
   /* Clinical Card conforme DESIGN.md (Components > Cards): fundo branco puro,
      borda 1px Earthy Sand (surface-dim), sem sombra pesada. */
   .clinical-card {

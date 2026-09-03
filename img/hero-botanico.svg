@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Composição botânica abstrata em tons de verde">
+  <!--
+    Arte de capa do Studio Bastos.
+
+    Substitui a foto que vinha do CDN do Stitch (lh3.googleusercontent.com/aida-public/...):
+    aquelas URLs são temporárias e, quando expiram, o topo do site — a primeira
+    coisa que o cliente vê — vira um ícone de imagem quebrada. Sendo um SVG local,
+    não depende de rede externa e fica nítido em qualquer resolução.
+
+    Cores do tema "Botanical Clinical Elegance" (tailwind.config.js):
+    primary #01261f, primary-container #1a3c34, on-primary-container #83a69c,
+    inverse-primary #aacec3, primary-fixed #c5eadf, secondary-container #fed488.
+
+    ENQUADRAMENTO — a arte é cortada de dois jeitos bem diferentes pelo object-cover:
+      desktop (~1400x460) => faixa horizontal do MEIO, y ~250-650;
+      mobile  (~414x409)  => quadrado CENTRAL, x ~350-1250.
+    A interseção dessas duas áreas (o miolo) é o que sempre aparece, então é lá que
+    ficam a luz e os ramos principais. Cantos e bordas extremas são zona de sacrifício:
+    servem só ao desktop e podem sumir sem prejuízo.
+
+    A faixa de baixo escurece de propósito: o index.html sobrepõe o nome do salão
+    em branco sobre ela.
+  -->
+  <defs>
+    <linearGradient id="fundo" x1="0.8" y1="0.05" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#d8f0e7"/>
+      <stop offset="26%" stop-color="#9dbdb2"/>
+      <stop offset="58%" stop-color="#3d635a"/>
+      <stop offset="82%" stop-color="#12332b"/>
+      <stop offset="100%" stop-color="#01261f"/>
+    </linearGradient>
+
+    <!-- Luz principal puxada para o miolo, para sobreviver aos dois cortes. -->
+    <radialGradient id="luz" cx="0.63" cy="0.2" r="0.55">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="40%" stop-color="#dff3ec" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#c5eadf" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="baseEscura" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#01261f" stop-opacity="0"/>
+      <stop offset="55%" stop-color="#01261f" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#01261f" stop-opacity="0.8"/>
+    </linearGradient>
+
+    <filter id="suave" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <filter id="muitoSuave" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="48"/>
+    </filter>
+
+    <!-- Folha simples, reaproveitada em várias escalas e ângulos. -->
+    <path id="folha" d="M0 0 C 34 -30, 96 -34, 132 0 C 96 34, 34 30, 0 0 Z"/>
+
+    <!-- Ramo de eucalipto: caule curvo + folhas alternadas dos dois lados. -->
+    <g id="ramo">
+      <path d="M0 0 C 90 -18, 190 -30, 300 -26" fill="none" stroke="#01261f" stroke-opacity="0.4" stroke-width="4" stroke-linecap="round"/>
+      <use href="#folha" transform="translate(38 -8) rotate(-34) scale(0.42)"/>
+      <use href="#folha" transform="translate(66 -2) rotate(28) scale(0.38)"/>
+      <use href="#folha" transform="translate(108 -16) rotate(-40) scale(0.5)"/>
+      <use href="#folha" transform="translate(140 -8) rotate(24) scale(0.44)"/>
+      <use href="#folha" transform="translate(186 -24) rotate(-30) scale(0.54)"/>
+      <use href="#folha" transform="translate(220 -14) rotate(30) scale(0.46)"/>
+      <use href="#folha" transform="translate(262 -30) rotate(-22) scale(0.5)"/>
+      <use href="#folha" transform="translate(292 -22) rotate(18) scale(0.4)"/>
+    </g>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#fundo)"/>
+
+  <!-- Massas de folhagem desfocadas: profundidade sem virar borrão identificável.
+       Mantidas fora do miolo para não sujar o corte do mobile. -->
+  <g fill="#01261f" opacity="0.2" filter="url(#muitoSuave)">
+    <ellipse cx="150" cy="760" rx="340" ry="200"/>
+    <ellipse cx="1470" cy="800" rx="300" ry="180"/>
+  </g>
+  <g fill="#dff3ec" opacity="0.12" filter="url(#muitoSuave)">
+    <ellipse cx="1180" cy="90" rx="300" ry="170"/>
+    <ellipse cx="430" cy="60" rx="240" ry="130"/>
+  </g>
+
+  <rect width="1600" height="900" fill="url(#luz)"/>
+
+  <!-- Camada de fundo: ramos claros e desfocados, atrás da luz. -->
+  <g filter="url(#suave)" opacity="0.26" fill="#dff3ec">
+    <use href="#ramo" transform="translate(-70 250) rotate(8) scale(1.45)"/>
+    <use href="#ramo" transform="translate(1670 300) rotate(172) scale(1.4)"/>
+  </g>
+
+  <!-- Camada intermediária: entra no miolo pelo alto, visível nos dois cortes. -->
+  <g fill="#1a3c34" opacity="0.42">
+    <use href="#ramo" transform="translate(330 105) rotate(28) scale(1.05)"/>
+    <use href="#ramo" transform="translate(1285 130) rotate(150) scale(1.1)"/>
+  </g>
+
+  <!-- Primeiro plano: nítido e escuro, emoldurando as laterais do miolo. -->
+  <g fill="#01261f" opacity="0.5">
+    <use href="#ramo" transform="translate(-40 560) rotate(-16) scale(1.4)"/>
+    <use href="#ramo" transform="translate(1650 560) rotate(196) scale(1.4)"/>
+    <use href="#ramo" transform="translate(395 715) rotate(-9) scale(1.15)"/>
+    <use href="#ramo" transform="translate(1230 745) rotate(189) scale(1.15)"/>
+  </g>
+  <g fill="#12332b" opacity="0.5">
+    <use href="#ramo" transform="translate(-30 400) rotate(-3) scale(1.1)"/>
+    <use href="#ramo" transform="translate(1640 400) rotate(183) scale(1.1)"/>
+  </g>
+
+  <!-- Gotas de luz suspensas — leitura "sereno / clínico", não "festivo". -->
+  <g fill="#ffffff">
+    <circle cx="1010" cy="250" r="9" opacity="0.5"/>
+    <circle cx="1108" cy="335" r="5" opacity="0.36"/>
+    <circle cx="905" cy="365" r="6" opacity="0.28"/>
+    <circle cx="1195" cy="240" r="4" opacity="0.4"/>
+    <circle cx="760" cy="290" r="4" opacity="0.26"/>
+    <circle cx="672" cy="395" r="5" opacity="0.2"/>
+  </g>
+  <!-- Um único toque do dourado da paleta (secondary-container), bem discreto. -->
+  <g fill="#fed488" opacity="0.32">
+    <circle cx="1062" cy="192" r="7"/>
+    <circle cx="845" cy="225" r="4"/>
+  </g>
+
+  <rect width="1600" height="900" fill="url(#baseEscura)"/>
+</svg>

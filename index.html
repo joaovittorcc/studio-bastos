@@ -5,9 +5,18 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta name="robots" content="noindex, nofollow">
 <title>Studio Bastos - Vitrine Digital</title>
+<!-- Fontes servidas do próprio domínio (fonts/, geradas por scripts/build-fonts.js).
+     Antes vinham de fonts.googleapis.com em runtime, o que dava dois problemas:
+     1) se a requisição ao Google falhasse, a fonte de ícones não carregava e cada
+        <span class="material-symbols-outlined">search</span> aparecia como a palavra
+        "search" na tela ("science", "location_on", "star"... por todo o site);
+     2) o CSS do Google define .material-symbols-outlined { font-size: 24px } e vinha
+        DEPOIS do output.css, então ganhava dos text-[16px]/text-[18px]/text-2xl que o
+        HTML declara nos ícones e estourava o tamanho deles dentro dos badges.
+     Por isso as fontes vêm primeiro e o output.css (Tailwind) por último. -->
+<link rel="preload" href="fonts/material-symbols-outlined.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
 <link rel="stylesheet" href="dist/output.css">
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
     .demo-nota { background: #5d4201; color: #ffffff; }
 </style>
@@ -43,19 +52,48 @@
 
 <script>
 (function () {
-    var header = document.getElementById('site-header');
+    // Mede a altura das barras fixas do topo. Duas coisas dependem disso:
+    //   --header-h: onde a barra de categorias gruda (top-[var(--header-h)]);
+    //   --sticky-h: header + barra de categorias. É o recuo que uma âncora precisa
+    //               ter para o título da seção não ficar escondido atrás das duas
+    //               barras ao clicar numa categoria (ver .scroll-target no input.css).
+    // O aviso de demonstração quebra em 2 linhas em telas estreitas, então essa altura
+    // muda conforme a largura e precisa ser remedida — daí o resize/ResizeObserver.
+    var raiz = document.documentElement;
     function medir() {
-        document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+        var header = document.getElementById('site-header');
+        var barraCategorias = document.getElementById('category-bar');
+        var alturaHeader = header ? header.offsetHeight : 0;
+        raiz.style.setProperty('--header-h', alturaHeader + 'px');
+        raiz.style.setProperty('--sticky-h',
+            (alturaHeader + (barraCategorias ? barraCategorias.offsetHeight : 0)) + 'px');
     }
+    // Roda já (a barra de categorias ainda não existe: só o --header-h sai correto,
+    // que é justamente o que ela precisa para se posicionar) e de novo com o DOM pronto.
     medir();
     window.addEventListener('resize', medir);
+    document.addEventListener('DOMContentLoaded', function () {
+        medir();
+        if (window.ResizeObserver) {
+            var observador = new ResizeObserver(medir);
+            ['site-header', 'category-bar'].forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el) observador.observe(el);
+            });
+        }
+    });
 })();
 </script>
 
 <!-- Header Section (Mobile priority, centered on Desktop) -->
 <header class="relative w-full h-[409px] md:h-[460px] min-h-[300px] flex items-end justify-center md:rounded-b-3xl overflow-hidden mx-auto max-w-container-max md:mt-4 shadow-xl">
-    <div class="absolute inset-0 bg-surface-variant">
-        <img class="w-full h-full object-cover" alt="Ambiente clínico sereno de tratamento capilar, com iluminação suave e paleta em tons de verde botânico e branco, foto ilustrativa gerada por IA" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2RZMznZhG7AQhCnbrLgCTyZRvQsDIzB44LoQWP0YPfWjfGASSQiNRkeM8oZV8nf0I7F6j7UnPnjGmhJ77ZQmEJQtlSM7VWrrbxf9aA0oDNlK5JUWhEfDnUrNwn1H17WpzVPEyQOE_o2f3b4Vg_M0mnShJbZf4lQcOW5LqX9x-1EFu6IMDNIVV6ptQkffFH1yNoUUEV0l9h2aVP3yDblAiCc3v4XhY984qbwaWYTAnnbMMASqH4uks">
+    <!-- Arte local (img/hero-botanico.svg). Antes era uma foto do CDN do Stitch
+         (lh3.googleusercontent.com/aida-public/...); aquelas URLs são temporárias e,
+         ao expirarem, deixavam a capa do site — a primeira coisa que o cliente vê —
+         como imagem quebrada. O bg-primary-container é a rede de segurança: se por
+         qualquer motivo a arte não renderizar, o texto branco por cima continua legível. -->
+    <div class="absolute inset-0 bg-primary-container">
+        <img class="w-full h-full object-cover" width="1600" height="900" fetchpriority="high" alt="Composição botânica abstrata em tons de verde, remetendo ao ambiente sereno de tratamento capilar do salão" src="img/hero-botanico.svg">
     </div>
     <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent"></div>
     <div class="relative z-10 w-full px-4 md:px-8 py-8 flex flex-col items-start gap-3 max-w-4xl">
@@ -85,15 +123,23 @@
 
 <main class="max-w-container-max mx-auto md:px-8 pb-[120px] md:pb-16">
     <!-- Sticky Category Navigation -->
-    <div class="sticky top-[var(--header-h)] z-40 glass-surface border-b border-outline-variant/40 px-4 md:px-8 py-3 shadow-sm mb-12">
+    <div id="category-bar" class="sticky top-[var(--header-h)] z-40 glass-surface border-b border-outline-variant/40 px-4 md:px-8 py-3 shadow-sm mb-12">
         <div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-3 md:gap-gutter items-center justify-between">
             <!-- Search Bar -->
-            <div class="relative w-full md:w-64">
+            <!-- shrink-0: sem isso o campo cede espaço para a lista de categorias ao
+                 lado e encolhe até cortar o placeholder. A largura fixa é a mínima que
+                 comporta "Buscar um serviço..." inteiro (~200px com os paddings),
+                 deixando o resto da linha para as categorias. -->
+            <div class="relative w-full md:w-52 md:shrink-0">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-                <input id="search-input" class="w-full bg-surface-container-high border-none rounded-full py-2 pl-10 pr-4 text-on-surface focus:ring-2 focus:ring-primary font-body-md text-body-md placeholder-on-surface-variant" placeholder="Buscar um serviço..." type="text">
+                <input id="search-input" class="w-full bg-surface-container-high border-none rounded-full py-2 pl-10 pr-4 text-on-surface focus:ring-2 focus:ring-primary font-body-md text-body-md placeholder-on-surface-variant" placeholder="Buscar serviço..." type="search" aria-label="Buscar um serviço" autocomplete="off">
             </div>
             <!-- Categories -->
-            <div id="category-nav" class="flex gap-2 w-full overflow-x-auto pb-2 no-scrollbar snap-x">
+            <!-- No mobile as categorias rolam na horizontal (snap-x), que é o padrão
+                 esperado ali. No desktop elas quebram linha (md:flex-wrap): rolagem
+                 horizontal sem barra visível esconderia categorias sem nenhuma pista
+                 de que existem — e o catálogo real do salão pode ter mais que estas 5. -->
+            <div id="category-nav" class="flex gap-2 w-full overflow-x-auto pb-2 no-scrollbar snap-x md:flex-wrap md:overflow-x-visible md:justify-end">
                 <a class="snap-start flex-shrink-0 bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-label-caps text-label-caps flex items-center gap-2 shadow-sm" href="#tricologia">
                     <span class="material-symbols-outlined text-[18px]">science</span>
                     Tricologia
@@ -119,7 +165,7 @@
     </div>
 
     <div class="px-4 md:px-0 max-w-4xl mx-auto">
-        <div id="servicos-container" class="flex flex-col gap-12">
+        <div id="servicos-container" class="scroll-target flex flex-col gap-12">
             <!-- Renderizado dinamicamente por js/main.js a partir de window.SERVICOS -->
         </div>
     </div>
@@ -161,20 +207,6 @@
     <p class="font-body-md text-body-md text-on-surface-variant text-sm text-center opacity-70">© 2026 Studio Bastos - Goiânia, GO.</p>
 </footer>
 
-<script>
-    // Realça a categoria clicada na barra de categorias (não afeta a nav superior de desktop).
-    const categoryLinks = document.querySelectorAll('#category-nav a');
-    categoryLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            categoryLinks.forEach(l => {
-                l.classList.remove('bg-primary-container', 'text-on-primary-container');
-                l.classList.add('bg-surface-container-high', 'text-on-surface');
-            });
-            e.currentTarget.classList.remove('bg-surface-container-high', 'text-on-surface');
-            e.currentTarget.classList.add('bg-primary-container', 'text-on-primary-container');
-        });
-    });
-</script>
 <script src="js/servicos-data.js"></script>
 <script src="js/main.js"></script>
 </body>

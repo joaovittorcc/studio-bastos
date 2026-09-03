@@ -38,6 +38,44 @@ function irParaServicos() {
     if (servicos) servicos.scrollIntoView({ behavior: 'smooth' });
 }
 
+// --- Barra de categorias -----------------------------------------------------
+// As "pills" da barra são âncoras (<a href="#tricologia">) para seções que o
+// renderServicos cria dinamicamente. Como a busca pode remover seções inteiras do
+// DOM, uma pill podia acabar apontando para uma seção que não existe mais: o clique
+// não fazia nada e a pill continuava com aparência de clicável. As funções abaixo
+// mantêm a barra coerente com o que está de fato na tela.
+
+const CLASSES_PILL_ATIVA = ['bg-primary-container', 'text-on-primary-container'];
+const CLASSES_PILL_INATIVA = ['bg-surface-container-high', 'text-on-surface'];
+
+function pillsCategorias() {
+    return Array.from(document.querySelectorAll('#category-nav a[href^="#"]'));
+}
+
+function categoriaDaPill(pill) {
+    return pill.getAttribute('href').slice(1);
+}
+
+function destacarPill(pillAtiva) {
+    pillsCategorias().forEach((pill) => {
+        const ativa = pill === pillAtiva;
+        pill.classList.remove(...(ativa ? CLASSES_PILL_INATIVA : CLASSES_PILL_ATIVA));
+        pill.classList.add(...(ativa ? CLASSES_PILL_ATIVA : CLASSES_PILL_INATIVA));
+    });
+}
+
+// Esconde as pills cujas seções a busca filtrou (clicar nelas não levaria a lugar
+// nenhum) e garante que o destaque fique sempre numa pill visível.
+function sincronizarPills(categoriasVisiveis) {
+    const visiveis = pillsCategorias().filter((pill) => {
+        const disponivel = categoriasVisiveis.includes(categoriaDaPill(pill));
+        pill.classList.toggle('hidden', !disponivel);
+        return disponivel;
+    });
+    const destaqueSumiu = !visiveis.some((pill) => pill.classList.contains('bg-primary-container'));
+    if (destaqueSumiu && visiveis.length > 0) destacarPill(visiveis[0]);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     renderServicos();
 
@@ -45,6 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (searchInput) {
         searchInput.addEventListener('input', (e) => renderServicos(e.target.value));
     }
+
+    // O scroll em si fica por conta da âncora nativa + html { scroll-behavior: smooth };
+    // o recuo para o título não ficar atrás das barras fixas vem da classe
+    // .scroll-target aplicada nas seções. Aqui só cuidamos do destaque visual.
+    pillsCategorias().forEach((pill) => {
+        pill.addEventListener('click', (e) => destacarPill(e.currentTarget));
+    });
 });
 
 function formatPreco(preco) {
@@ -60,6 +105,7 @@ function renderServicos(termoBusca) {
     if (!servicosContainer) return;
     servicosContainer.innerHTML = '';
     const termo = (termoBusca || '').trim().toLowerCase();
+    const categoriasVisiveis = [];
 
     Object.keys(window.CATEGORIAS).forEach((catKey) => {
         const cat = window.CATEGORIAS[catKey];
@@ -72,9 +118,11 @@ function renderServicos(termoBusca) {
         }
         if (servicos.length === 0) return;
 
+        categoriasVisiveis.push(catKey);
         const section = document.createElement('section');
         section.id = catKey;
-        section.className = 'scroll-mt-32';
+        // .scroll-target recua a âncora pela altura real das barras fixas (--sticky-h).
+        section.className = 'scroll-target';
         section.innerHTML = `
             <div class="mb-4">
                 <h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
@@ -89,6 +137,8 @@ function renderServicos(termoBusca) {
         const grid = document.getElementById(`${catKey}-grid`);
         servicos.forEach((servico) => grid.appendChild(servico.imagem ? createCardComFoto(servico) : createCardSemFoto(servico)));
     });
+
+    sincronizarPills(categoriasVisiveis);
 
     if (servicosContainer.children.length === 0) {
         servicosContainer.innerHTML = `
@@ -126,7 +176,11 @@ function createCardSemFoto(servico) {
     const card = document.createElement('div');
     card.className = 'clinical-card rounded-lg p-4 flex flex-col';
     card.innerHTML = `
-        <div class="flex justify-between items-start gap-3 mb-1">
+        <!-- flex-wrap é o que impede o badge de preço de vazar do card: em coluna
+             estreita (grid de 3 no desktop) o título em Playfair + o badge com
+             whitespace-nowrap não cabiam na mesma linha e o badge era cortado pela
+             borda. Sem espaço, ele agora desce para a linha de baixo. -->
+        <div class="flex flex-wrap justify-between items-start gap-x-3 gap-y-2 mb-1">
             <h3 class="font-headline-sm text-headline-sm text-on-surface">${servico.nome}</h3>
             <span class="shrink-0 bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-3 py-1 rounded-full shadow-sm whitespace-nowrap">${formatPreco(servico.preco)}</span>
         </div>
